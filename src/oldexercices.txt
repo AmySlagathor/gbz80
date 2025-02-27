@@ -1,0 +1,323 @@
+
+INCLUDE "include/hardware.inc"
+	rev_Check_hardware_inc 4.0
+
+DEF TEXTSPEED EQU 8
+
+SECTION "Variables", WRAM0
+vblankFlag:
+ds 1
+
+SECTION "Interrupts", ROM0[$40]
+;$40 VBlank
+jp vblankHandler
+ds 5, 0 ;Deja 5 bytes de espacio vacíos
+ret
+
+SECTION "Header", ROM0[$100]
+
+	; This is your ROM's entry point
+	; You have 4 bytes of code to do... something
+	di
+	jp EntryPoint
+
+	; Make sure to allocate some space for the header, so no important
+	; code gets put there and later overwritten by RGBFIX.
+	; RGBFIX is designed to operate over a zero-filled header, so make
+	; sure to put zeros regardless of the padding value. (This feature
+	; was introduced in RGBDS 0.4.0, but the -MG etc flags were also
+	; introduced in that version.)
+	ds $150 - @, 0
+
+SECTION "Entry point", ROM0
+
+;EntryPoint:
+	; Here is where the fun begins, happy coding :)
+; --Ejercicio 2.1-- Pinta una R en la esquina superior izquierda de la pantalla
+/*
+	ld a, $19		
+	ld [$9800], a	
+*/
+
+; --Ejercicio 2.3-- Pinta una N en la esquina inferior derecha de la pantalla
+/*
+	ld a, $0E
+	ld [$9800 + $20*17 + $13], a 	; Esquina inferior derecha de la N.
+									; Cada fila tiene 32 bytes ($20 en hexadecimal) por tanto puedo calcular en que fila quiero empezar. 17 es la ultima fila.
+									; Cada fila tiene $13 (19) columnas.
+									; 9A33 es la esquina inferior derecha de la pantalla
+	ld a, $0D
+	ld [$9800 + $20*17 + $12], a	; Esquina inferior izquierda de la N.
+	ld a, $02
+	ld [$9800 + $20*16 + $13], a	; Esquina superior derecha de la N.
+	ld a, $01
+	ld [$9800 + $20*16 + $12], a	; Esquina superior izquierda de la N.
+*/
+
+; --Ejercicio 2.4-- Pinta una N en la esquina inferior derecha de la pantalla sin usar el registro a y solo dos instrucciones ld hl
+/*
+	ld hl, $9800 + $20*17 + $12
+	ld [hl], $0D
+	inc hl
+	ld[hl], $0E
+	ld hl, $9800 + $20*16 + $12
+	ld [hl], $01
+	inc hl
+	ld [hl], $02
+*/
+
+; --Ejercicio 2.5-- Comprobando las Flags
+
+/*
+	;Probando INC
+	ld c, $FE
+	inc c ;Resultado: (C=FF) Z=0, N=0
+	inc c ;Resultado: (C=00) Z=1, N=0
+	;Probando DEC
+	ld b, $02
+	dec b ;Resultado: (B=01) Z=0, N=1
+	dec b ;Resultado: (B=00) Z=1, N=1
+
+	;Probando ADD
+	ld d, $80
+	ld a, $00
+	add d ;Resultado: (A=80) Z=0, N=0, C=0
+	add d ;Resultado: (A=00) Z=1, N=0, C=1
+	ld a, $C0
+	add d ;Resultado: (A=40) Z=0, N=0, C=1
+*/
+
+; --Ejercicio 2.6-- Probando bucles
+/*
+
+EntryPoint:
+	ld a, [rLY]
+	cp 144
+	jr nz, EntryPoint
+	ld de, $9800
+	ld a, $19
+	ld b, 5
+	.loop
+		ld [de], a
+		inc de
+		dec b
+		jr nz, .loop
+	jr @
+*/
+
+; --Ejercicio 2.7-- Pinta un triángulo en la esquina superior izquierda de la pantalla usando bucles
+/*	
+EntryPoint:
+	ld a, [rLY]
+	cp 144
+jr nz, EntryPoint
+
+ld de, $9800	; Direccion donde empieza la memoria de video	
+ld b, 5 		; Iteraciones para el bucle
+ld c, 5
+
+.loop1
+	.loop2
+		ld a, $19	; Caracter a imprimir
+		ld [de], a
+		inc de
+		dec b
+		jr nz, .loop2
+	ld a, e
+	sub c
+	add a, $20
+	ld e, a
+	dec c
+	ld b, c
+jr nz, .loop1
+jr @
+*/
+
+; --Ejercicio 2.8--
+;Escribe un mismo valor en varios bytes seguidos.
+/*
+
+EntryPoint:
+
+ld b, 5 ;Input B: Número de veces a escribir el valor, debe ser al menos 1.
+ld hl, $9800 ;Input HL: Dirección dónde empezar a escribir.
+call PintaLinea
+
+jr @
+
+PintaLinea:
+	call checkppu
+	ld a, $19 ;Input A: Valor a escribir.
+	ld [hl+], a
+	dec b
+	jr nz, PintaLinea
+ret
+
+;Comprobamos modo PPU
+checkppu:
+	ld a,[rSTAT]
+	AND %00000010
+	jr nz, checkppu
+ret
+*/
+; --Ejercicio 2.8.2 -- Vuelve a pintar 2.7 pero esta vez con funciones
+/*
+
+EntryPoint:
+	ld a, [rLY] 	;\ This seems to check PPU state ??? 
+	cp 144			;|
+jr nz, EntryPoint	;|
+
+ld b, 5
+ld hl, $9800 ;Input HL: Dirección dónde empezar a escribir.
+ld de, $0020 ;Salto de linea
+call Trongle
+
+jr @
+
+Trongle:
+	ld c, b
+	call PintaLinea
+	add hl, de
+	ld a, l
+	sub b
+	ld l, a
+	dec b
+	jr nz, Trongle
+ret
+
+PintaLinea:
+	ld a, $19 ;Input A: Valor a escribir.
+	ld [hl+], a
+	dec c
+	jr nz, PintaLinea
+ret
+*/
+
+; --Ejercicio 3.2 -- Cargar fuente
+
+vblankHandler:
+	push hl
+	push af
+	ld hl, vblankFlag
+	ld a, 1
+	ld [hl], a
+	pop af
+	pop hl
+reti
+
+WaitVBlank::
+	push hl
+	push bc
+
+	ld hl, vblankFlag ; hl = pointer to vblankFlag
+	xor a ; a = 0
+	ld [hl], a ; pone vblankFlag a 0
+	ld b, TEXTSPEED
+	.loop
+		.wait
+			halt
+			cp a, [hl] ; si vblankFlag es 0
+			jr z, .wait ; vuelve a esperar
+			dec b
+	jr nz, .loop
+
+	pop bc
+	pop hl
+ret
+
+EntryPoint:
+	ld a, [rLY] 	;\ This seems to check PPU state ??? 
+	cp 144			;|
+jr nz, EntryPoint	;|
+
+call Setup
+
+ld hl, texto
+call EscribeTexto
+jr @
+
+; -----------------
+	;jr EntryPoint
+	;jr @ ; Salta sobre esta misma línea
+
+
+---------------------------- UTILS.ASM ----------------------------
+
+INCLUDE "include/hardware.inc"
+	rev_Check_hardware_inc 4.0
+
+SECTION "Utils", ROM0
+
+DEF FONT_TILES EQU 107      ; Numero de caracteres que tiene la fuente 
+DEF BYTES_PER_TILE EQU 16   ; 2 filas * 8 bytes
+DEF FILECOUNT EQU 20		; Cada fila tiene $20 columnas
+
+CheckPPU::
+	ld a,[rSTAT]
+	AND %00000010
+	jr nz, CheckPPU
+ret
+
+Setup::
+	call CargarFuente
+	call BorrarLogoNintendo
+	
+	call InterruptSetup
+ret
+
+BorrarLogoNintendo:: ; de, b
+	ld de, $9904	; Direccion donde empieza el logo de Nintendo	
+	ld b, 13		; Iteraciones para el bucle
+	call BorrarLinea
+
+	ld de, $9904 + $20
+	ld b, 13
+	call BorrarLinea
+ret
+
+BorrarLinea:: ;a, de , b
+	.loop1
+		call CheckPPU
+		ld a, $00	; Caracter a imprimir
+		ld [de], a
+		inc de
+		dec b
+	jr nz, .loop1
+ret
+
+CargarFuente::
+    ld hl, Fuente 	                    ; Cargamos la dirección donde está la fuente
+    ld de, $8800	                    ; Direccion donde vamos a empezar a escribir
+    ld bc, FONT_TILES*BYTES_PER_TILE	; Numero de bytes que vamos a escribir
+	.cargarCaracter
+		call CheckPPU
+		ld a, [hl+]
+		ld [de], a
+		inc de
+		dec bc
+		ld a, b
+		or c
+		jr nz, .cargarCaracter
+ret
+
+EscribeTexto::
+	call CheckPPU
+	ld de, $99C1
+	.escribeCaracter
+		call CheckPPU
+		ld a, [hl]
+		or a
+		ret z
+		
+		ld [de], a
+		inc hl
+		inc de
+		call WaitVBlank
+		jr .escribeCaracter
+ret
+
+InterruptSetup::
+	ld a, %00000001
+	ld [rIE], a ;Habilita la interrupción VBlank y deshabilita el resto
+reti 			;Retorna y activa IME

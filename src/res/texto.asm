@@ -143,3 +143,9 @@ texto::
 DB "watashiha AMANNTA\" te\"su."
 DB 0
 ; sashisuseso tachitsuteto naninuneno hahifuheho mamimumemo yayuyo rarirurero wawonn _tsu_ya_yu_yo º\"?!.", 0
+
+textoLargo::
+DB "konnnichiha!", 10
+DB "watashiha AMANNTA\" te\"su.", 10
+DB "SUHEºINNshi\"nn  te\"su.", 10
+DB "yoroshiku oneka\"ishimasu.", 0
