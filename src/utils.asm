@@ -7,8 +7,8 @@ DEF FONT_TILES EQU 107      ; Numero de caracteres que tiene la fuente
 DEF BYTES_PER_TILE EQU 16   ; 2 filas * 8 bytes
 DEF FILECOUNT EQU 20		; Cada fila tiene $20 columnas
 
-DEF TEXT_LENGTH EQU 15
-DEF TEXT_DIR EQU $99C1
+DEF TEXT_LENGTH EQU 18
+DEF TEXT_DIR EQU $9A01
 
 CheckPPU::
 	ld a,[rSTAT]
