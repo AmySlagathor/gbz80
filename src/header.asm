@@ -39,6 +39,8 @@ vblankHandler:
 	ld [hl], a
 	pop af
 	pop hl
+
+	call LeerBotones
 reti
 
 WaitVBlank::

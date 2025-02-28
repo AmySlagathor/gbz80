@@ -92,6 +92,9 @@ EscribeCaracter:: ; hl (texto), de (dirección)
 ret
 
 CargarSiguienteLinea::
+
+	call waitApressed
+
 	call DesplazarLinea
 
 	ld de, TEXT_DIR
@@ -100,6 +103,14 @@ CargarSiguienteLinea::
 
 	ld de, TEXT_DIR
 ret
+
+waitApressed::
+	.waitApressed
+		ldh a, [flancoAscendente]
+		cp PADF_A
+		ret z
+		halt
+	jr .waitApressed
 
 DesplazarLinea::
 	; Copiar tres lineas de abajo a arriba
