@@ -3,7 +3,7 @@ INCLUDE "include/hardware.inc"
 
 SECTION "Utils", ROM0
 
-DEF FONT_TILES EQU 107      ; Numero de caracteres que tiene la fuente 
+DEF FONT_TILES EQU 110      ; Numero de caracteres que tiene la fuente 
 DEF BYTES_PER_TILE EQU 16   ; 2 filas * 8 bytes
 DEF FILECOUNT EQU 20		; Cada fila tiene $20 columnas
 

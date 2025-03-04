@@ -2,152 +2,134 @@ SECTION "Texto", ROM0
 
 NEWCHARMAP texto, main
 
-;HIRAGANA
-CHARMAP "a", 128
-CHARMAP "i", 129
-CHARMAP "u", 130
-CHARMAP "e", 131
-CHARMAP "o", 132
+CHARMAP "A", 128
+CHARMAP "B", 129
+CHARMAP "C", 130
+CHARMAP "D", 131
+CHARMAP "E", 132
+CHARMAP "F", 133
+CHARMAP "G", 134
+CHARMAP "H", 135
+CHARMAP "I", 136
+CHARMAP "J", 137
+CHARMAP "K", 138
+CHARMAP "L", 139
+CHARMAP "M", 140
+CHARMAP "N", 141
+CHARMAP "Ñ", 142
+CHARMAP "O", 143
+CHARMAP "P", 144
+CHARMAP "Q", 145
+CHARMAP "R", 146
+CHARMAP "S", 147
+CHARMAP "T", 148
+CHARMAP "U", 149
+CHARMAP "V", 150
+CHARMAP "W", 151
+CHARMAP "X", 152
+CHARMAP "Y", 153
+CHARMAP "Z", 154
 
-CHARMAP "ka", 133
-CHARMAP "ki", 134
-CHARMAP "ku", 135
-CHARMAP "ke", 136
-CHARMAP "ko", 137
+CHARMAP "a", 155
+CHARMAP "b", 156
+CHARMAP "c", 157
+CHARMAP "d", 158
+CHARMAP "e", 159
+CHARMAP "f", 160
+CHARMAP "g", 161
+CHARMAP "h", 162
+CHARMAP "i", 163
+CHARMAP "j", 164
+CHARMAP "k", 165
+CHARMAP "l", 166
+CHARMAP "m", 167
+CHARMAP "n", 168
+CHARMAP "ñ", 169
+CHARMAP "o", 170
+CHARMAP "p", 171
+CHARMAP "q", 172
+CHARMAP "r", 173
+CHARMAP "s", 174
+CHARMAP "t", 175
+CHARMAP "u", 176
+CHARMAP "v", 177
+CHARMAP "w", 178
+CHARMAP "x", 179
+CHARMAP "y", 180
+CHARMAP "z", 181
 
-CHARMAP "sa", 138
-CHARMAP "shi", 139
-CHARMAP "su", 140
-CHARMAP "se", 141
-CHARMAP "so", 142
+CHARMAP "Á", 182
+CHARMAP "À", 183
+CHARMAP "Ä", 184
+CHARMAP "É", 185
+CHARMAP "È", 186
+CHARMAP "Í", 187
+CHARMAP "Ì", 188
+CHARMAP "Ó", 189
+CHARMAP "Ò", 190
+CHARMAP "Ö", 191
+CHARMAP "Ú", 192
+CHARMAP "Ù", 193
+CHARMAP "Ü", 194
 
-CHARMAP "ta", 143
-CHARMAP "chi", 144
-CHARMAP "tsu", 145
-CHARMAP "te", 146
-CHARMAP "to", 147
+CHARMAP "á", 195
+CHARMAP "à", 196
+CHARMAP "ä", 197
+CHARMAP "é", 198
+CHARMAP "è", 199
+CHARMAP "í", 200
+CHARMAP "ì", 201
+CHARMAP "ó", 202
+CHARMAP "ò", 203
+CHARMAP "ö", 204
+CHARMAP "ù", 205
+CHARMAP "ú", 206
+CHARMAP "ü", 207
 
-CHARMAP "na", 148
-CHARMAP "ni", 149
-CHARMAP "nu", 150
-CHARMAP "ne", 151
-CHARMAP "no", 152
+CHARMAP "(", 208
+CHARMAP ")", 209
 
-CHARMAP "ha", 153
-CHARMAP "hi", 154
-CHARMAP "fu", 155
-CHARMAP "he", 156
-CHARMAP "ho", 157
+CHARMAP "[", 210
+CHARMAP "]", 211
+CHARMAP ".", 212
+CHARMAP ",", 213
+CHARMAP "¿", 214
+CHARMAP "?", 215
+CHARMAP "¡", 216
+CHARMAP "!", 217
 
-CHARMAP "ma", 158
-CHARMAP "mi", 159
-CHARMAP "mu", 160
-CHARMAP "me", 161
-CHARMAP "mo", 162
+CHARMAP "0", 218
+CHARMAP "1", 219
+CHARMAP "2", 220
+CHARMAP "3", 221
+CHARMAP "4", 222
+CHARMAP "5", 223
+CHARMAP "6", 224
+CHARMAP "7", 225
+CHARMAP "8", 226
+CHARMAP "9", 227
 
-CHARMAP "ya", 163
-CHARMAP "yu", 164
-CHARMAP "yo", 165
+CHARMAP "_", 228 ; Este es la flecha hacia abajo
+CHARMAP "'", 229
 
-CHARMAP "ra", 166
-CHARMAP "ri", 167
-CHARMAP "ru", 168
-CHARMAP "re", 169
-CHARMAP "ro", 170
-
-CHARMAP "wa", 171
-CHARMAP "wo", 172
-CHARMAP "nn", 173
-
-CHARMAP "_tsu", 174
-CHARMAP "_ya", 175
-CHARMAP "_yu", 176
-CHARMAP "_yo", 177
-
-CHARMAP "º", 178
-CHARMAP "\"", 179
-CHARMAP "?", 180
-CHARMAP "!", 181
-CHARMAP ".", 182
-CHARMAP ",", 183
-
-;KATAKANA
-CHARMAP "A", 184
-CHARMAP "I", 185
-CHARMAP "U", 186
-CHARMAP "E", 187
-CHARMAP "O", 188
-
-CHARMAP "KA", 189
-CHARMAP "KI", 190
-CHARMAP "KU", 191
-CHARMAP "KE", 192
-CHARMAP "KO", 193
-
-CHARMAP "SA", 194
-CHARMAP "SHI", 195
-CHARMAP "SU", 196
-CHARMAP "SE", 197
-CHARMAP "SO", 198
-
-CHARMAP "TA", 199
-CHARMAP "CHI", 200
-CHARMAP "TSU", 201
-CHARMAP "TE", 202
-CHARMAP "TO", 203
-
-CHARMAP "NA", 204
-CHARMAP "NI", 205
-CHARMAP "NU", 206
-CHARMAP "NE", 207
-CHARMAP "NO", 208
-
-CHARMAP "HA", 209
-CHARMAP "HI", 210
-CHARMAP "FU", 211
-CHARMAP "HE", 156 ; El mismo caracter que en hiragana
-CHARMAP "HO", 212
-
-CHARMAP "MA", 213
-CHARMAP "MI", 214
-CHARMAP "MU", 215
-CHARMAP "ME", 216
-CHARMAP "MO", 217
-
-CHARMAP "YA", 218
-CHARMAP "YU", 219
-CHARMAP "YO", 220
-
-CHARMAP "RA", 221
-CHARMAP "RI", 167 ; Usa el mismo caracter que en hiragana
-CHARMAP "RU", 222
-CHARMAP "RE", 223
-CHARMAP "RO", 224
-
-CHARMAP "WA", 225
-CHARMAP "WO", 226
-CHARMAP "NN", 227
-
-CHARMAP "_TSU", 228
-CHARMAP "_YA", 229
-CHARMAP "_YU", 230
-CHARMAP "_YO", 231
-CHARMAP "_I", 232
-CHARMAP "_-", 233
-
-CHARMAP " ", 234
+CHARMAP "\"", 230
+CHARMAP "''", 231 ; Cerrar coma
+CHARMAP "\"\"", 232 ; Cerrar comillas
+CHARMAP "-", 233
+CHARMAP "...", 234
+CHARMAP "/", 235
+CHARMAP "·", 236
+CHARMAP " ", 237
 
 
 texto::
-;DB "ohayouko\"sa\"imasu! watashiha AMANNDA desu."
-DB "watashiha AMANNTA\" te\"su."
+DB "Tengo un condon relleno de coca metido por el culo."
 DB 0
-; sashisuseso tachitsuteto naninuneno hahifuheho mamimumemo yayuyo rarirurero wawonn _tsu_ya_yu_yo º\"?!.", 0
 
 textoLargo::
-DB "konnnichiha!", 10
-DB "watashiha AMANNTA\" te\"su.", 10
-DB "SUHEºINNshi\"nn  te\"su.", 10
-DB "yoroshiku oneka\"ishimasu.", 10
-DB "sukina tahe\"mono ha nannte\"suka.", 10
-DB "unaki\"to\"nn ka\" ta\"isukite\"su.", 0
+DB "¡Hola!_", 10
+DB "¿Tu padre qué tal mea?_", 10
+DB "Soy el conde strapula_", 10
+DB "... merequetengue_", 10
+DB "sukina tabemono wa nan desuka_", 10
+DB "el diablo", 0
