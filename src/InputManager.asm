@@ -46,3 +46,11 @@ LeerBotones::
 	pop bc
 	pop af
 ret
+
+waitApressed::
+	.waitApressed
+		ldh a, [flancoAscendente]
+		cp PADF_A
+		ret z
+		halt
+	jr .waitApressed

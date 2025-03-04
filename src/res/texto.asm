@@ -148,4 +148,6 @@ textoLargo::
 DB "konnnichiha!", 10
 DB "watashiha AMANNTA\" te\"su.", 10
 DB "SUHEºINNshi\"nn  te\"su.", 10
-DB "yoroshiku oneka\"ishimasu.", 0
+DB "yoroshiku oneka\"ishimasu.", 10
+DB "sukina tahe\"mono ha nannte\"suka.", 10
+DB "unaki\"to\"nn ka\" ta\"isukite\"su.", 0
