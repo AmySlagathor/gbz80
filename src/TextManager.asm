@@ -147,7 +147,6 @@ ret
 
 ResetTextManager::
 	call DisableScrollText
-	call CalculateDialogueBoxBounds
 ret
 
 ShowDialogueBox::
