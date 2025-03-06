@@ -8,13 +8,15 @@ ds 1
 SECTION "TextManager", ROM0
 
 DEF TEXT_LENGTH EQU 18
-DEF TEXT_DIR1 EQU $9C21
-DEF TEXT_DIR2 EQU $9C61
+DEF TEXT_DIR1 EQU $9C22
+DEF TEXT_DIR2 EQU $9C62
 
 ;Window constants
 DEF LCDC EQU $FF40
 DEF WY EQU $FF4A ;  WY=0..143, indica el píxel verical de la pantalla en el que empieza la ventana
 DEF WX EQU $FF4B ; WX=0..166, indica el píxel horizontal más 7
+DEF WBORDERY EQU $9C00 ;la ventana ocupa de $9C00 a $9FFF TODO cambiar por un sprite mas tarde
+DEF BORDER_TILE EQU $19
 
 TextManagerSetup::
     call SetupWindow
@@ -27,7 +29,7 @@ ret
 SetupWindow:: ; modifies( a,de )
 	push de
 
-	;setup windows WY, WX corners
+	;setup window WY, WX corners
 	ld a, 100
 	ld [WY], a
 	ld a, 0
@@ -45,7 +47,6 @@ ret
 EnableWindow:: ; modifies( a,de )
 	push de
 
-	; LCDC se encuentra en $FF40
 	; para activar la ventana hay que poner un 1 en el bit 5 de LCDC
 	ld de, LCDC
 	ld a, [de]
@@ -146,18 +147,66 @@ ret
 
 ResetTextManager::
 	call DisableScrollText
+	call CalculateDialogueBoxBounds
 ret
 
-MuestraDialogo::
+ShowDialogueBox::
 	call ResetTextManager
-	
 	call EnableWindow
+	call PrintDialogueBoxBounds
 
 	ld de, TEXT_DIR1
 	call EscribeTexto
 
 	call waitApressed ; Wait for player to press A to close the window
 	call DisableWindow
+ret
+
+PrintDialogueBoxBounds::
+	push bc
+	push hl
+	push de
+
+	; la ventana va de $9C00 a $9FFF
+	ld hl, $9C01
+	ld b, 20
+	call PrintXLine
+
+	ld hl, $9C21
+	ld b, 4
+	call PrintYLine
+
+	ld hl, $9CA1
+	ld b, 20
+	call PrintXLine
+
+	ld hl, $9C34
+	ld b, 4
+	call PrintYLine
+
+	pop de
+	pop hl
+	pop bc
+ret
+
+PrintXLine:: ; input( destination[hl], iterations[b] )
+		call CheckPPU
+		ld a, $19 ; TODO need to assign a here or else will be lost
+		ld [hl+], a
+		dec b
+		jr nz, PrintXLine
+ret
+
+PrintYLine:: ; input( destination[hl], iterations[b] )
+		call CheckPPU
+		ld a, $19 ; TODO need to assign a here or else will be lost
+		ld [hl], a
+
+		ld de, $0020
+		add hl, de
+
+		dec b
+		jr nz, PrintYLine
 ret
 
 BorrarLinea:: ; input( address[de], iterations[b] ), modifies( a,b,de )

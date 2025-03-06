@@ -121,15 +121,18 @@ CHARMAP "/", 235
 CHARMAP "·", 236
 CHARMAP " ", 237
 
-
+; ---- MAXIMA LONGITUD 18 CARACTERES ----
 texto::
 DB "Tengo un condon relleno de coca metido por el culo."
 DB 0
 
 textoLargo::
-DB "¡Hola!_", 10
-DB "¿Tu padre qué tal mea?_", 10
-DB "Soy el conde strapula_", 10
-DB "... merequetengue_", 10
-DB "sukina tabemono wa nan desuka_", 10
+DB "¡Hola!", 10
+DB "Soy el conde", 10 
+DB " strapula.", 10
+DB "¿Tu padre qué tal", 10
+DB " mea?", 10
+DB "... merequetengue.", 10
+DB "sukina tabemono wa", 10
+DB " nan desuka.", 10
 DB "el diablo", 0

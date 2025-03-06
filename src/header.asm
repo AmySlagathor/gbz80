@@ -71,7 +71,7 @@ jr nz, EntryPoint	;|
 call Setup
 
 ld hl, textoLargo
-call MuestraDialogo
+call ShowDialogueBox
 jr @
 
 ; -----------------
