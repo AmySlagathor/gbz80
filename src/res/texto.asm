@@ -123,16 +123,16 @@ CHARMAP " ", 237
 
 ; ---- MAXIMA LONGITUD 18 CARACTERES ----
 texto::
-DB "Tengo un condon relleno de coca metido por el culo."
+DB "Lorem ipsum dolor "
 DB 0
 
 textoLargo::
-DB "¡Hola!", 10
-DB "Soy el conde", 10 
-DB " strapula.", 10
-DB "¿Tu padre qué tal", 10
-DB " mea?", 10
-DB "... merequetengue.", 10
-DB "sukina tabemono wa", 10
-DB " nan desuka.", 10
-DB "el diablo", 0
+DB "Lorem ipsum dolor ", 10
+DB "sit amet, consecte", 10 
+DB "tur adipiscing ", 10
+DB "elit, sed do eiusm", 10
+DB "od tempor incididu", 10
+DB "nt ut labore et do", 10
+DB "lore magna aliqua.", 10
+DB "Ut enim ad minim ve", 10
+DB "niam, quis nostrud", 0

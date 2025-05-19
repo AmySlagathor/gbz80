@@ -15,6 +15,7 @@ ret
 
 Setup::
 	call CargarFuente
+	;call BulkCopy
 	;call BorrarLogoNintendo
 	call InterruptSetup
 	call TextManagerSetup

@@ -70,6 +70,8 @@ jr nz, EntryPoint	;|
 
 call Setup
 
+;call LoadHero
+
 ld hl, textoLargo
 call ShowDialogueBox
 jr @
